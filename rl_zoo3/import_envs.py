@@ -55,6 +55,11 @@ try:
 except ImportError:
     minigrid = None
 
+try:
+    import mycobotgym
+except ImportError:
+    mycobotgym = None
+
 
 # Register no vel envs
 def create_no_vel_env(env_id: str):

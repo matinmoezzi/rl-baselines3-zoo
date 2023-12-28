@@ -213,6 +213,107 @@ Swimmer-v3:
 
 # === HER Robotics GoalEnvs ===
 
+MyCobotFetchReach-Dense-joint-v0:
+  n_timesteps: !!float 100000
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  batch_size: 256
+  gamma: 0.95
+  learning_rate: 0.001
+  learning_starts: 1000
+  normalize: True
+  policy_kwargs: "dict(net_arch=[64, 64])"
+
+MyCobotFetchReach-Sparse-joint-v0:
+  n_timesteps: !!float 100000
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  batch_size: 256
+  gamma: 0.95
+  learning_rate: 0.001
+  learning_starts: 1000
+  normalize: True
+  replay_buffer_class: HerReplayBuffer
+  replay_buffer_kwargs: "dict(
+    goal_selection_strategy='future',
+    n_sampled_goal=4
+  )"
+  policy_kwargs: "dict(net_arch=[64, 64])"
+
+MyCobotFetchReach-Dense-IK-v0:
+  n_timesteps: !!float 100000
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  batch_size: 256
+  gamma: 0.95
+  learning_rate: 0.001
+  learning_starts: 1000
+  normalize: True
+  policy_kwargs: "dict(net_arch=[64, 64])"
+
+MyCobotFetchReach-Sparse-IK-v0:
+  n_timesteps: !!float 100000
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  batch_size: 256
+  gamma: 0.95
+  learning_rate: 0.001
+  learning_starts: 1000
+  normalize: True
+  replay_buffer_class: HerReplayBuffer
+  replay_buffer_kwargs: "dict(
+    goal_selection_strategy='future',
+    n_sampled_goal=4
+  )"
+  policy_kwargs: "dict(net_arch=[64, 64])"
+
+MyCobotFetchPickAndPlace-Sparse-delta_joint-v0: &mycobot-pickplace-sparse-defaults
+  n_timesteps: !!float 5e6 
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  batch_size: 2048
+  gamma: 0.95
+  learning_rate: 0.001
+  learning_starts: 1000
+  normalize: True
+  replay_buffer_class: HerReplayBuffer
+  replay_buffer_kwargs: "dict(
+    goal_selection_strategy='future',
+    n_sampled_goal=4
+  )"
+  policy_kwargs: "dict(net_arch=[512, 512, 512], n_critics=2)"
+
+MyCobotFetchPickAndPlace-Sparse-joint-v0:
+  <<: *mycobot-pickplace-sparse-defaults
+MyCobotFetchPickAndPlace-Sparse-IK-v0:
+  <<: *mycobot-pickplace-sparse-defaults
+MyCobotFetchPickAndPlace-Dense-IK-v0: &mycobot-pickplace-dense-defaults
+  n_timesteps: !!float 5e6 
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  batch_size: 2048
+  gamma: 0.95
+  learning_rate: 0.001
+  learning_starts: 1000
+  normalize: True
+  policy_kwargs: "dict(net_arch=[512, 512, 512], n_critics=2)"
+MyCobotFetchPickAndPlace-Dense-joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotFetchPickAndPlace-Dense-delta_joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotFetchPickAndPlace-RewardShaping-joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotFetchPickAndPlace-RewardShaping-IK-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotFetchPickAndPlace-RewardShaping-delta_joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+
 FetchReach-v1:
   n_timesteps: !!float 20000
   policy: 'MultiInputPolicy'
