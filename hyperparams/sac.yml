@@ -293,6 +293,9 @@ MyCobotFetchPickAndPlace-Sparse-joint-v0:
   <<: *mycobot-pickplace-sparse-defaults
 MyCobotFetchPickAndPlace-Sparse-IK-v0:
   <<: *mycobot-pickplace-sparse-defaults
+MyCobotFetchPickAndPlace-Sparse-mocap-v0:
+  <<: *mycobot-pickplace-sparse-defaults
+
 MyCobotFetchPickAndPlace-Dense-IK-v0: &mycobot-pickplace-dense-defaults
   n_envs: 100
   n_timesteps: !!float 5e6 
@@ -309,11 +312,15 @@ MyCobotFetchPickAndPlace-Dense-joint-v0:
   <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-Dense-delta_joint-v0:
   <<: *mycobot-pickplace-dense-defaults
+MyCobotFetchPickAndPlace-Dense-mocap-v0:
+  <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-RewardShaping-joint-v0:
   <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-RewardShaping-IK-v0:
   <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-RewardShaping-delta_joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotFetchPickAndPlace-RewardShaping-mocap-v0: 
   <<: *mycobot-pickplace-dense-defaults
 
 FetchReach-v1:
