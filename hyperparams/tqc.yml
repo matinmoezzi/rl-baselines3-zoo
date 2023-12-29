@@ -1,6 +1,6 @@
 MyCobotFetchReach-Sparse-IK-v0: &mycobot-reach-sparse-defaults
   n_envs: 100
-  n_timesteps: !!float 1e5
+  n_timesteps: !!float 1e6
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'
@@ -25,7 +25,7 @@ MyCobotFetchReach-Sparse-delta_joint-v0:
   
 MyCobotFetchReach-Dense-IK-v0: &mycobot-reach-dense-defaults
   n_envs: 100
-  n_timesteps: !!float 1e5
+  n_timesteps: !!float 1e6
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'

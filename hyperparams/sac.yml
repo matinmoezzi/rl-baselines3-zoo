@@ -214,7 +214,7 @@ Swimmer-v3:
 # === HER Robotics GoalEnvs ===
 
 MyCobotFetchReach-Dense-joint-v0:
-  n_timesteps: !!float 100000
+  n_timesteps: !!float 1000000
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'
@@ -226,7 +226,7 @@ MyCobotFetchReach-Dense-joint-v0:
   policy_kwargs: "dict(net_arch=[64, 64])"
 
 MyCobotFetchReach-Sparse-joint-v0:
-  n_timesteps: !!float 100000
+  n_timesteps: !!float 1000000
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'
@@ -243,7 +243,7 @@ MyCobotFetchReach-Sparse-joint-v0:
   policy_kwargs: "dict(net_arch=[64, 64])"
 
 MyCobotFetchReach-Dense-IK-v0:
-  n_timesteps: !!float 100000
+  n_timesteps: !!float 1000000
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'
@@ -255,7 +255,7 @@ MyCobotFetchReach-Dense-IK-v0:
   policy_kwargs: "dict(net_arch=[64, 64])"
 
 MyCobotFetchReach-Sparse-IK-v0:
-  n_timesteps: !!float 100000
+  n_timesteps: !!float 1000000
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'
