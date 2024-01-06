@@ -1,3 +1,29 @@
+## Release 2.2.1 (2023-11-17)
+
+### Breaking Changes
+- Removed `gym` dependency, the package is still required for some pretrained agents.
+- Upgraded to SB3 >= 2.2.1
+- Upgraded to Huggingface-SB3 >= 3.0
+- Upgraded to pytablewriter >= 1.0
+
+### New Features
+- Added `--eval-env-kwargs` to `train.py` (@Quentin18)
+- Added `ppo_lstm` to hyperparams_opt.py (@technocrat13)
+
+### Bug fixes
+- Upgraded to `pybullet_envs_gymnasium>=0.4.0`
+- Removed old hacks (for instance limiting offpolicy algorithms to one env at test time)
+
+### Documentation
+
+### Other
+- Updated docker image, removed support for X server
+- Replaced deprecated `optuna.suggest_uniform(...)` by `optuna.suggest_float(..., low=..., high=...)`
+- Switched to ruff for sorting imports
+- Updated tests to use `shlex.split()`
+- Fixed `rl_zoo3/hyperparams_opt.py` type hints
+- Fixed `rl_zoo3/exp_manager.py` type hints
+
 ## Release 2.1.0 (2023-08-17)
 
 ### Breaking Changes
@@ -16,7 +42,6 @@
 ### Documentation
 
 ### Other
-
 
 
 ## Release 2.0.0 (2023-06-22)
