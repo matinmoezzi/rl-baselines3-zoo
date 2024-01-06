@@ -212,83 +212,92 @@ Swimmer-v3:
   gamma: 0.9999
 
 # === HER Robotics GoalEnvs ===
-
-MyCobotFetchReach-Dense-joint-v0:
-  n_timesteps: !!float 1000000
+MyCobot-Default: &mycobot-defaults
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'
-  batch_size: 256
   gamma: 0.95
   learning_rate: 0.001
   learning_starts: 1000
   normalize: True
+  batch_size: 256
   policy_kwargs: "dict(net_arch=[64, 64])"
+  gradient_steps: -1
 
+MyCobotReach-Sparse-joint-v0: &mycobot-reach-sparse-defaults
+  <<: *mycobot-defaults
+  n_timesteps: !!float 100000
+  replay_buffer_class: HerReplayBuffer
+  replay_buffer_kwargs: "dict(
+    goal_selection_strategy='future',
+    n_sampled_goal=4
+  )"
+MyCobotReach-Sparse-delta_joint-v0:
+  <<: *mycobot-reach-sparse-defaults
+MyCobotReach-Sparse-IK-v0:
+  <<: *mycobot-reach-sparse-defaults
+MyCobotReach-Sparse-mocap-v0:
+  <<: *mycobot-reach-sparse-defaults
 MyCobotFetchReach-Sparse-joint-v0:
-  n_timesteps: !!float 1000000
-  policy: 'MultiInputPolicy'
-  buffer_size: 1000000
-  ent_coef: 'auto'
-  batch_size: 256
-  gamma: 0.95
-  learning_rate: 0.001
-  learning_starts: 1000
-  normalize: True
-  replay_buffer_class: HerReplayBuffer
-  replay_buffer_kwargs: "dict(
-    goal_selection_strategy='future',
-    n_sampled_goal=4
-  )"
-  policy_kwargs: "dict(net_arch=[64, 64])"
-
-MyCobotFetchReach-Dense-IK-v0:
-  n_timesteps: !!float 1000000
-  policy: 'MultiInputPolicy'
-  buffer_size: 1000000
-  ent_coef: 'auto'
-  batch_size: 256
-  gamma: 0.95
-  learning_rate: 0.001
-  learning_starts: 1000
-  normalize: True
-  policy_kwargs: "dict(net_arch=[64, 64])"
-
+  <<: *mycobot-reach-sparse-defaults
 MyCobotFetchReach-Sparse-IK-v0:
-  n_timesteps: !!float 1000000
-  policy: 'MultiInputPolicy'
-  buffer_size: 1000000
-  ent_coef: 'auto'
-  batch_size: 256
-  gamma: 0.95
-  learning_rate: 0.001
-  learning_starts: 1000
-  normalize: True
-  replay_buffer_class: HerReplayBuffer
-  replay_buffer_kwargs: "dict(
-    goal_selection_strategy='future',
-    n_sampled_goal=4
-  )"
-  policy_kwargs: "dict(net_arch=[64, 64])"
+  <<: *mycobot-reach-sparse-defaults
+MyCobotFetchReach-Sparse-mocap-v0:
+  <<: *mycobot-reach-sparse-defaults
+MyCobotFetchReach-Sparse-delta_joint-v0:
+  <<: *mycobot-reach-sparse-defaults
 
-MyCobotFetchPickAndPlace-Sparse-delta_joint-v0: &mycobot-pickplace-sparse-defaults
-  n_envs: 100
-  n_timesteps: !!float 5e6 
-  policy: 'MultiInputPolicy'
-  buffer_size: 1000000
-  ent_coef: 'auto'
-  batch_size: 2048
-  gamma: 0.95
-  learning_rate: 0.001
-  learning_starts: 1000
-  normalize: True
+MyCobotReach-Dense-IK-v0: &mycobot-reach-dense-defaults
+  <<: *mycobot-defaults
+  n_timesteps: !!float 1000000
+MyCobotReach-Dense-joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-Dense-delta_joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-Dense-mocap-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-Dense-IK-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-Dense-joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-Dense-delta_joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-Dense-mocap-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-RewardShaping-joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-RewardShaping-IK-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-RewardShaping-delta_joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-RewardShaping-mocap-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-RewardShaping-joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-RewardShaping-IK-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-RewardShaping-delta_joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-RewardShaping-mocap-v0:
+  <<: *mycobot-reach-dense-defaults
+
+MyCobotPickAndPlace-Sparse-joint-v0: &mycobot-pickplace-sparse-defaults
+  <<: *mycobot-defaults
+  n_timesteps: !!float 1e6
   replay_buffer_class: HerReplayBuffer
   replay_buffer_kwargs: "dict(
     goal_selection_strategy='future',
     n_sampled_goal=4
   )"
   policy_kwargs: "dict(net_arch=[512, 512, 512], n_critics=2)"
-
+MyCobotPickAndPlace-Sparse-IK-v0:
+  <<: *mycobot-pickplace-sparse-defaults
+MyCobotPickAndPlace-Sparse-mocap-v0: 
+  <<: *mycobot-pickplace-sparse-defaults
+MyCobotPickAndPlace-Sparse-delta_joint-v0:
+  <<: *mycobot-pickplace-sparse-defaults
+MyCobotFetchPickAndPlace-Sparse-delta_joint-v0:
+  <<: *mycobot-pickplace-sparse-defaults
 MyCobotFetchPickAndPlace-Sparse-joint-v0:
   <<: *mycobot-pickplace-sparse-defaults
 MyCobotFetchPickAndPlace-Sparse-IK-v0:
@@ -297,16 +306,7 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v0:
   <<: *mycobot-pickplace-sparse-defaults
 
 MyCobotFetchPickAndPlace-Dense-IK-v0: &mycobot-pickplace-dense-defaults
-  n_envs: 100
-  n_timesteps: !!float 5e6 
-  policy: 'MultiInputPolicy'
-  buffer_size: 1000000
-  ent_coef: 'auto'
-  batch_size: 2048
-  gamma: 0.95
-  learning_rate: 0.001
-  learning_starts: 1000
-  normalize: True
+  n_timesteps: !!float 1e6 
   policy_kwargs: "dict(net_arch=[512, 512, 512], n_critics=2)"
 MyCobotFetchPickAndPlace-Dense-joint-v0:
   <<: *mycobot-pickplace-dense-defaults
@@ -314,6 +314,25 @@ MyCobotFetchPickAndPlace-Dense-delta_joint-v0:
   <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-Dense-mocap-v0:
   <<: *mycobot-pickplace-dense-defaults
+
+MyCobotPickAndPlace-Dense-joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotPickAndPlace-Dense-delta_joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotPickAndPlace-Dense-mocap-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotPickAndPlace-Dense-joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+
+MyCobotPickAndPlace-RewardShaping-joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotPickAndPlace-RewardShaping-IK-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotPickAndPlace-RewardShaping-delta_joint-v0:
+  <<: *mycobot-pickplace-dense-defaults
+MyCobotPickAndPlace-RewardShaping-mocap-v0: 
+  <<: *mycobot-pickplace-dense-defaults
+
 MyCobotFetchPickAndPlace-RewardShaping-joint-v0:
   <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-RewardShaping-IK-v0:
