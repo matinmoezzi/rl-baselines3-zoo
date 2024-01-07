@@ -249,7 +249,7 @@ MyCobotFetchReach-Sparse-delta_joint-v0:
 
 MyCobotReach-Dense-IK-v0: &mycobot-reach-dense-defaults
   <<: *mycobot-defaults
-  n_timesteps: !!float 1000000
+  n_timesteps: !!float 100000
 MyCobotReach-Dense-joint-v0:
   <<: *mycobot-reach-dense-defaults
 MyCobotReach-Dense-delta_joint-v0:
@@ -284,7 +284,6 @@ MyCobotFetchReach-RewardShaping-mocap-v0:
 MyCobotPickAndPlace-Sparse-joint-v0: &mycobot-pickplace-sparse-defaults
   <<: *mycobot-defaults
   n_timesteps: !!float 1e6
-  batch_size: 2048
   replay_buffer_class: HerReplayBuffer
   replay_buffer_kwargs: "dict(
     goal_selection_strategy='future',
@@ -307,6 +306,7 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v0:
   <<: *mycobot-pickplace-sparse-defaults
 
 MyCobotFetchPickAndPlace-Dense-IK-v0: &mycobot-pickplace-dense-defaults
+  <<: *mycobot-defaults
   n_timesteps: !!float 1e6 
   policy_kwargs: "dict(net_arch=[512, 512, 512], n_critics=2)"
 MyCobotFetchPickAndPlace-Dense-joint-v0:
