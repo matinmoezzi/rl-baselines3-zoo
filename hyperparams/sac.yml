@@ -284,6 +284,7 @@ MyCobotFetchReach-RewardShaping-mocap-v0:
 MyCobotPickAndPlace-Sparse-joint-v0: &mycobot-pickplace-sparse-defaults
   <<: *mycobot-defaults
   n_timesteps: !!float 1e6
+  batch_size: 2048
   replay_buffer_class: HerReplayBuffer
   replay_buffer_kwargs: "dict(
     goal_selection_strategy='future',
