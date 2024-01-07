@@ -236,6 +236,48 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v0:
 MyCobotFetchPickAndPlace-Sparse-delta_joint-v0:
   <<: *her-defaults
 
+MyCobotPickAndPlace-Dense-joint-v0: &mycobot-pickandplace-dense-defaults
+  n_timesteps: !!float 1e6
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  batch_size: 2048
+  gamma: 0.95
+  learning_rate: !!float 1e-3
+  tau: 0.05
+  policy_kwargs: "dict(net_arch=[512, 512, 512], n_critics=2)"
+MyCobotPickAndPlace-Dense-IK-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotPickAndPlace-Dense-mocap-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotPickAndPlace-Dense-delta_joint-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotFetchPickAndPlace-Dense-joint-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotFetchPickAndPlace-Dense-IK-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotFetchPickAndPlace-Dense-mocap-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotFetchPickAndPlace-Dense-delta_joint-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+
+MyCobotPickAndPlace-RewardShaping-joint-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotPickAndPlace-RewardShaping-IK-v0: 
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotPickAndPlace-RewardShaping-mocap-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotPickAndPlace-RewardShaping-delta_joint-v0:  
+  <<: *mycobot-pickandplace-dense-defaults
+
+MyCobotFetchPickAndPlace-RewardShaping-joint-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotFetchPickAndPlace-RewardShaping-IK-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotFetchPickAndPlace-RewardShaping-mocap-v0: 
+  <<: *mycobot-pickandplace-dense-defaults
+MyCobotFetchPickAndPlace-RewardShaping-delta_joint-v0:
+  <<: *mycobot-pickandplace-dense-defaults
+
 PandaReach-v1:
   n_timesteps: !!float 20000
   policy: 'MultiInputPolicy'
