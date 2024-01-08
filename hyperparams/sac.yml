@@ -258,10 +258,6 @@ MyCobotReach-Dense-mocap-v0:
   <<: *mycobot-reach-dense-defaults
 MyCobotFetchReach-Dense-IK-v0:
   <<: *mycobot-reach-dense-defaults
-MyCobotFetchReach-Dense-joint-v0:
-  <<: *mycobot-reach-dense-defaults
-MyCobotFetchReach-Dense-delta_joint-v0:
-  <<: *mycobot-reach-dense-defaults
 MyCobotFetchReach-Dense-mocap-v0:
   <<: *mycobot-reach-dense-defaults
 MyCobotReach-RewardShaping-joint-v0:
@@ -272,18 +268,14 @@ MyCobotReach-RewardShaping-delta_joint-v0:
   <<: *mycobot-reach-dense-defaults
 MyCobotReach-RewardShaping-mocap-v0:
   <<: *mycobot-reach-dense-defaults
-MyCobotFetchReach-RewardShaping-joint-v0:
-  <<: *mycobot-reach-dense-defaults
 MyCobotFetchReach-RewardShaping-IK-v0:
-  <<: *mycobot-reach-dense-defaults
-MyCobotFetchReach-RewardShaping-delta_joint-v0:
   <<: *mycobot-reach-dense-defaults
 MyCobotFetchReach-RewardShaping-mocap-v0:
   <<: *mycobot-reach-dense-defaults
 
 MyCobotPickAndPlace-Sparse-joint-v0: &mycobot-pickplace-sparse-defaults
   <<: *mycobot-defaults
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 3e6
   replay_buffer_class: HerReplayBuffer
   replay_buffer_kwargs: "dict(
     goal_selection_strategy='future',
@@ -296,10 +288,6 @@ MyCobotPickAndPlace-Sparse-mocap-v0:
   <<: *mycobot-pickplace-sparse-defaults
 MyCobotPickAndPlace-Sparse-delta_joint-v0:
   <<: *mycobot-pickplace-sparse-defaults
-MyCobotFetchPickAndPlace-Sparse-delta_joint-v0:
-  <<: *mycobot-pickplace-sparse-defaults
-MyCobotFetchPickAndPlace-Sparse-joint-v0:
-  <<: *mycobot-pickplace-sparse-defaults
 MyCobotFetchPickAndPlace-Sparse-IK-v0:
   <<: *mycobot-pickplace-sparse-defaults
 MyCobotFetchPickAndPlace-Sparse-mocap-v0:
@@ -307,12 +295,8 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v0:
 
 MyCobotFetchPickAndPlace-Dense-IK-v0: &mycobot-pickplace-dense-defaults
   <<: *mycobot-defaults
-  n_timesteps: !!float 1e6 
+  n_timesteps: !!float 3e6 
   policy_kwargs: "dict(net_arch=[512, 512, 512], n_critics=2)"
-MyCobotFetchPickAndPlace-Dense-joint-v0:
-  <<: *mycobot-pickplace-dense-defaults
-MyCobotFetchPickAndPlace-Dense-delta_joint-v0:
-  <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-Dense-mocap-v0:
   <<: *mycobot-pickplace-dense-defaults
 
@@ -334,11 +318,7 @@ MyCobotPickAndPlace-RewardShaping-delta_joint-v0:
 MyCobotPickAndPlace-RewardShaping-mocap-v0: 
   <<: *mycobot-pickplace-dense-defaults
 
-MyCobotFetchPickAndPlace-RewardShaping-joint-v0:
-  <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-RewardShaping-IK-v0:
-  <<: *mycobot-pickplace-dense-defaults
-MyCobotFetchPickAndPlace-RewardShaping-delta_joint-v0:
   <<: *mycobot-pickplace-dense-defaults
 MyCobotFetchPickAndPlace-RewardShaping-mocap-v0: 
   <<: *mycobot-pickplace-dense-defaults
