@@ -191,6 +191,27 @@ MyCobotFetchReach-Sparse-IK-v0:
 MyCobotFetchReach-Sparse-mocap-v0:
   <<: *reach-defaults
 
+MyCobotReach-Dense-joint-v0: &mycobot-reach-dense-defaults
+  n_timesteps: !!float 200000
+  policy: 'MultiInputPolicy'
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  batch_size: 256
+  gamma: 0.95
+  learning_rate: 0.001
+  learning_starts: 1000
+  normalize: True
+MyCobotReach-Dense-IK-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-Dense-mocap-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotReach-Dense-delta_joint-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-Dense-IK-v0:
+  <<: *mycobot-reach-dense-defaults
+MyCobotFetchReach-Dense-mocap-v0:
+  <<: *mycobot-reach-dense-defaults
+
 FetchPush-v1: &her-defaults
   n_timesteps: !!float 3e6
   policy: 'MultiInputPolicy'
