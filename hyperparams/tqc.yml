@@ -164,7 +164,7 @@ Swimmer-v3:
 
 # === HER Robotics GoalEnvs ===
 FetchReach-v1: &reach-defaults
-  n_timesteps: !!float 20000
+  n_timesteps: !!float 200000
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
   ent_coef: 'auto'

@@ -226,7 +226,7 @@ MyCobot-Default: &mycobot-defaults
 
 MyCobotReach-Sparse-joint-v0: &mycobot-reach-sparse-defaults
   <<: *mycobot-defaults
-  n_timesteps: !!float 100000
+  n_timesteps: !!float 200000
   replay_buffer_class: HerReplayBuffer
   replay_buffer_kwargs: "dict(
     goal_selection_strategy='future',
@@ -249,7 +249,7 @@ MyCobotFetchReach-Sparse-delta_joint-v0:
 
 MyCobotReach-Dense-IK-v0: &mycobot-reach-dense-defaults
   <<: *mycobot-defaults
-  n_timesteps: !!float 100000
+  n_timesteps: !!float 200000
 MyCobotReach-Dense-joint-v0:
   <<: *mycobot-reach-dense-defaults
 MyCobotReach-Dense-delta_joint-v0:
