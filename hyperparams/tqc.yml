@@ -186,6 +186,8 @@ MyCobotReach-Sparse-IK-v0:
   <<: *reach-defaults
 MyCobotReach-Sparse-mocap-v0:
   <<: *reach-defaults
+MyCobotReach-Sparse-delta_joint-v0:
+  <<: *reach-defaults
 MyCobotFetchReach-Sparse-IK-v0:
   <<: *reach-defaults
 MyCobotFetchReach-Sparse-mocap-v0:
