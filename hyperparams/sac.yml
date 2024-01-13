@@ -332,8 +332,8 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-fetch-pickplace-sparse-defaul
   normalize: True
   batch_size: 128
   vec_env_wrapper:
-    - rl_zoo3.wrappers.FrameSkip:
-        skip: 4
+    # - rl_zoo3.wrappers.FrameSkip:
+    #     skip: 4
     - stable_baselines3.common.vec_env.VecTransposeImage:
         skip: False
   env_wrapper:

@@ -290,8 +290,8 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-v1-fetch-pickandplace-sparse-
   learning_rate: lin_1e-4
   tau: 0.05
   vec_env_wrapper:
-    - rl_zoo3.wrappers.FrameSkip:
-        skip: 4
+    # - rl_zoo3.wrappers.FrameSkip:
+    #     skip: 4
     - stable_baselines3.common.vec_env.VecTransposeImage:
         skip: False
   env_wrapper:
