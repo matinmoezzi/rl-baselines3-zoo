@@ -304,7 +304,7 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-v1-fetch-pickandplace-sparse-
   n_timesteps: !!float 10e6
 
 MyCobotFetchPickAndPlace-Dense-mocap-v1:
-  <<: *mycobot-v1-fetch-pickandplace-sparse-default
+  <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
 
 PandaReach-v1:
   n_timesteps: !!float 20000
