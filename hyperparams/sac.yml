@@ -324,8 +324,16 @@ MyCobotFetchPickAndPlace-RewardShaping-mocap-v0:
   <<: *mycobot-pickplace-dense-defaults
 
 MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-fetch-pickplace-sparse-defaults-v1
-  <<: *mycobot-pickplace-sparse-defaults
+  buffer_size: 1000000
+  ent_coef: 'auto'
+  gamma: 0.99
+  learning_rate: lin_1e-4
+  learning_starts: 1000
+  normalize: True
+  batch_size: 128
   vec_env_wrapper:
+    - rl_zoo3.wrappers.FrameSkip:
+        skip: 4
     - stable_baselines3.common.vec_env.VecTransposeImage:
         skip: False
   env_wrapper:
@@ -335,19 +343,10 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-fetch-pickplace-sparse-defaul
         keep_dim: true
   policy: "CnnPolicy"
   n_timesteps: !!float 10e6
+  frame_stack: 2
 
-MyCobotFetchPickAndPlace-Dense-mocap-v1: &mycobot-fetch-pickplace-dense-defaults-v1
-  <<: *mycobot-pickplace-dense-defaults
-  vec_env_wrapper:
-    - stable_baselines3.common.vec_env.VecTransposeImage:
-        skip: False
-  env_wrapper:
-    - gymnasium.wrappers.resize_observation.ResizeObservation:
-        shape: 128
-    - gymnasium.wrappers.gray_scale_observation.GrayScaleObservation:
-        keep_dim: true
-  policy: "CnnPolicy"
-  n_timesteps: !!float 10e6
+MyCobotFetchPickAndPlace-Dense-mocap-v1:
+  <<: *mycobot-fetch-pickplace-sparse-defaults-v1
   
 
 FetchReach-v1:
