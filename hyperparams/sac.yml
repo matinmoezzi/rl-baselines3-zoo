@@ -344,6 +344,11 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-fetch-pickplace-sparse-defaul
   policy: "CnnPolicy"
   n_timesteps: !!float 10e6
   frame_stack: 2
+  normalize: {'norm_obs': False}
+  policy_kwargs: {
+    "features_extractor_kwargs": {
+      "normalized_image": False
+    }}
 
 MyCobotFetchPickAndPlace-Dense-mocap-v1:
   <<: *mycobot-fetch-pickplace-sparse-defaults-v1
