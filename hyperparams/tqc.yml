@@ -283,6 +283,32 @@ MyCobotFetchPickAndPlace-RewardShaping-IK-v0:
 MyCobotFetchPickAndPlace-RewardShaping-mocap-v0: 
   <<: *mycobot-pickandplace-dense-defaults
 
+MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-v1-fetch-pickandplace-sparse-defaults
+  <<: *her-defaults
+  vec_env_wrapper:
+    - stable_baselines3.common.vec_env.VecTransposeImage:
+        skip: False
+  env_wrapper:
+    - gymnasium.wrappers.resize_observation.ResizeObservation:
+        shape: 128
+    - gymnasium.wrappers.gray_scale_observation.GrayScaleObservation:
+        keep_dim: true
+  policy: 'CnnPolicy'
+  n_timesteps: !!float 10e6
+
+MyCobotFetchPickAndPlace-Dense-mocap-v1: &mycobot-v1-fetch-pickandplace-dense-defaults
+  <<: *mycobot-pickandplace-dense-defaults
+  vec_env_wrapper:
+    - stable_baselines3.common.vec_env.VecTransposeImage:
+        skip: False
+  env_wrapper:
+    - gymnasium.wrappers.resize_observation.ResizeObservation:
+        shape: 128
+    - gymnasium.wrappers.gray_scale_observation.GrayScaleObservation:
+        keep_dim: true
+  n_timesteps: !!float 10e6
+  policy: 'CnnPolicy'
+
 PandaReach-v1:
   n_timesteps: !!float 20000
   policy: 'MultiInputPolicy'

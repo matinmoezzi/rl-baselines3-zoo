@@ -323,8 +323,8 @@ MyCobotFetchPickAndPlace-RewardShaping-IK-v0:
 MyCobotFetchPickAndPlace-RewardShaping-mocap-v0: 
   <<: *mycobot-pickplace-dense-defaults
 
-MyCobotPickAndPlace-Sparse-joint-v1: &mycobot-pickplace-sparse-defaults-v1
-  <<: *mycobot-defaults
+MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-fetch-pickplace-sparse-defaults-v1
+  <<: *mycobot-pickplace-sparse-defaults
   vec_env_wrapper:
     - stable_baselines3.common.vec_env.VecTransposeImage:
         skip: False
@@ -334,14 +334,22 @@ MyCobotPickAndPlace-Sparse-joint-v1: &mycobot-pickplace-sparse-defaults-v1
     - gymnasium.wrappers.gray_scale_observation.GrayScaleObservation:
         keep_dim: true
   policy: "CnnPolicy"
-  normalize: {'norm_obs': False}
-  n_timesteps: !!float 3e6
-  policy_kwargs: {
-    "net_arch": [512, 512, 512],
-    "n_critics": 2,
-    "features_extractor_kwargs": {
-      "normalized_image": False
-    }}
+  n_timesteps: !!float 10e6
+
+MyCobotFetchPickAndPlace-Dense-mocap-v1: &mycobot-fetch-pickplace-dense-defaults-v1
+  <<: *mycobot-pickplace-dense-defaults
+  vec_env_wrapper:
+    - stable_baselines3.common.vec_env.VecTransposeImage:
+        skip: False
+  env_wrapper:
+    - gymnasium.wrappers.resize_observation.ResizeObservation:
+        shape: 128
+    - gymnasium.wrappers.gray_scale_observation.GrayScaleObservation:
+        keep_dim: true
+  policy: "CnnPolicy"
+  n_timesteps: !!float 10e6
+  
+
 FetchReach-v1:
   n_timesteps: !!float 20000
   policy: 'MultiInputPolicy'
