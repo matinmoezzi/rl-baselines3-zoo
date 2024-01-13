@@ -300,7 +300,7 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-v1-fetch-pickandplace-sparse-
     - gymnasium.wrappers.gray_scale_observation.GrayScaleObservation:
         keep_dim: true
   policy: 'CnnPolicy'
-  frame-stack: 2
+  frame_stack: 2
   n_timesteps: !!float 10e6
   normalize: {'norm_obs': False}
   policy_kwargs: {
