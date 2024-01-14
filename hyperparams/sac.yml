@@ -308,6 +308,8 @@ MyCobotPickAndPlace-Dense-mocap-v0:
   <<: *mycobot-pickplace-dense-defaults
 MyCobotPickAndPlace-Dense-joint-v0:
   <<: *mycobot-pickplace-dense-defaults
+MyCobotPickAndPlace-Dense-IK-v0:
+  <<: *mycobot-pickplace-dense-defaults
 
 MyCobotPickAndPlace-RewardShaping-joint-v0:
   <<: *mycobot-pickplace-dense-defaults
