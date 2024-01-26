@@ -34,5 +34,6 @@ blocks = [
     )
 for rs in all_runsets]
 
+
 report.blocks = blocks
 report.save()
