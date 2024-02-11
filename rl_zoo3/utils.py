@@ -489,3 +489,70 @@ def get_model_path(
         raise ValueError(f"No model found for {algo} on {env_name}, path: {model_path}")
 
     return name_prefix, model_path, log_path
+
+import torch as th
+import torch.nn as nn
+import torch as th
+from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
+
+class MyCobotCNN(BaseFeaturesExtractor):
+    """
+    Custom CNN Feature Extractor with separate CNNs for each of the 4 frames.
+    
+    :param observation_space: (gym.Space) The original single-frame observation space.
+    :param features_dim: (int) Number of features extracted.
+        This corresponds to the number of units for the last layer.
+    """
+
+    def __init__(self, observation_space: spaces.Box, features_dim: int = 256):
+        super().__init__(observation_space, features_dim)
+        
+        # We assume CxHxW images (channels first) for a single frame
+        n_input_channels = int(observation_space.shape[0] / 4)
+        
+        # Define a CNN architecture for a single frame
+        self.single_frame_cnn = nn.Sequential(
+            nn.Conv2d(n_input_channels, 32, kernel_size=8, stride=4, padding=0),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, kernel_size=4, stride=2, padding=0),
+            nn.ReLU(),
+            nn.Flatten(),
+        )
+        
+        # Create 4 separate CNNs by replicating the single_frame_cnn
+        self.cnns = nn.ModuleList([self.single_frame_cnn for _ in range(4)])
+        
+        # Compute shape by doing one forward pass with a dummy input for one CNN
+        dummy_input = th.zeros((1, n_input_channels) + observation_space.shape[1:], dtype=th.float32)
+        with th.no_grad():
+            single_cnn_output_dim = self.single_frame_cnn(dummy_input).shape[1]
+        
+        # The total concatenated output size will be 4 times a single CNN output
+        total_cnn_output_dim = single_cnn_output_dim * 4
+        
+        # Define the linear layer to map concatenated features to the desired feature dimension
+        self.linear = nn.Sequential(
+            nn.Linear(total_cnn_output_dim, features_dim),
+            nn.ReLU()
+        )
+
+    def forward(self, observations: th.Tensor) -> th.Tensor:
+        """
+        Forward pass through separate CNNs for each frame and concatenation of their outputs.
+        
+        :param observations: (th.Tensor) The input tensor containing 4 frames.
+                             Shape: (batch_size, 4*C, H, W)
+        :return: (th.Tensor) Extracted features.
+        """
+        # Split the input tensor into 4 separate tensors, one for each frame
+        frames = observations.chunk(4, dim=1)
+        
+        # Process each frame through its respective CNN and collect outputs
+        cnn_outputs = [cnn(frame) for cnn, frame in zip(self.cnns, frames)]
+        
+        # Concatenate the outputs of all CNNs
+        concatenated_output = th.cat(cnn_outputs, dim=1)
+        
+        # Pass the concatenated output through the linear layer
+        features = self.linear(concatenated_output)
+        return features

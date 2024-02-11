@@ -218,10 +218,10 @@ FetchPush-v1: &her-defaults
   n_timesteps: !!float 3e6
   policy: 'MultiInputPolicy'
   buffer_size: 1000000
-  batch_size: 2048
-  gamma: 0.95
+  batch_size: 512
+  gamma: 0.98
   learning_rate: !!float 1e-3
-  tau: 0.05
+  tau: 0.005
   replay_buffer_class: HerReplayBuffer
   replay_buffer_kwargs: "dict(
     goal_selection_strategy='future',
@@ -291,21 +291,15 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-v1-fetch-pickandplace-sparse-
   tau: 0.05
   vec_env_wrapper:
     - stable_baselines3.common.vec_env.VecTransposeImage:
-        skip: False
+        skip: True
   env_wrapper:
     - rl_zoo3.wrappers.FrameSkip:
         skip: 4
-    - gymnasium.wrappers.resize_observation.ResizeObservation:
-        shape: 64
-    - gymnasium.wrappers.gray_scale_observation.GrayScaleObservation:
-        keep_dim: true
   policy: 'CnnPolicy'
   n_timesteps: !!float 10e6
   normalize: {'norm_obs': False}
-  policy_kwargs: {
-    "features_extractor_kwargs": {
-      "normalized_image": False
-    }}
+  policy_kwargs: 'dict({
+    "features_extractor_class": getattr(rl_zoo3.utils, "MyCobotCNN")})'
 
 MyCobotFetchPickAndPlace-Dense-mocap-v1:
   <<: *mycobot-v1-fetch-pickandplace-sparse-defaults

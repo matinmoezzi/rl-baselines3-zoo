@@ -1,0 +1,1 @@
+python train_sbx.py --algo $1 --env $2 -P --log-interval 1000 --eval-freq 500000 --save-freq 1000000 --wandb-project-name mycobot-deepRL --wandb-entity matinmoezzi --track --n-timesteps 10_000_000 --hyperparams n_envs:200 learning_starts:20500 ${@:3}
