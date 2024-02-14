@@ -298,11 +298,21 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-v1-fetch-pickandplace-sparse-
   policy: 'CnnPolicy'
   n_timesteps: !!float 10e6
   normalize: {'norm_obs': False}
-  policy_kwargs: 'dict({
-    "features_extractor_class": getattr(rl_zoo3.utils, "MyCobotCNN")})'
 
 MyCobotFetchPickAndPlace-Dense-mocap-v1:
   <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
+MyCobotFetchPickAndPlace-RewardShaping-mocap-v1:
+  <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
+
+MyCobotFetchReach-Sparse-mocap-v1:
+  <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
+  n_timesteps: !!float 5e6
+MyCobotFetchReach-Dense-mocap-v1:
+  <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
+  n_timesteps: !!float 5e6
+MyCobotFetchReach-RewardShaping-mocap-v1:
+  <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
+  n_timesteps: !!float 5e6
 
 PandaReach-v1:
   n_timesteps: !!float 20000
