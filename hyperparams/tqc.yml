@@ -301,16 +301,11 @@ MyCobotFetchPickAndPlace-Sparse-mocap-v1: &mycobot-v1-fetch-pickandplace-sparse-
 
 MyCobotFetchPickAndPlace-Dense-mocap-v1:
   <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
-MyCobotFetchPickAndPlace-RewardShaping-mocap-v1:
-  <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
 
 MyCobotFetchReach-Sparse-mocap-v1:
   <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
   n_timesteps: !!float 5e6
 MyCobotFetchReach-Dense-mocap-v1:
-  <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
-  n_timesteps: !!float 5e6
-MyCobotFetchReach-RewardShaping-mocap-v1:
   <<: *mycobot-v1-fetch-pickandplace-sparse-defaults
   n_timesteps: !!float 5e6
 
