@@ -236,7 +236,11 @@ def create_test_env(
     # when the registry was modified with `--gym-packages`
     # See https://github.com/HumanCompatibleAI/imitation/pull/160
     def make_env(**kwargs) -> gym.Env:
-        return spec.make(**kwargs)
+        env = spec.make(**kwargs)
+        env.unwrapped.render_mode = env.unwrapped.game.render_mode
+        env.unwrapped.metadata["render_modes"].append(env.unwrapped.render_mode)
+        env.unwrapped.metadata["render_fps"] = env.unwrapped.game.framerate
+        return env
 
     env = make_vec_env(
         make_env,

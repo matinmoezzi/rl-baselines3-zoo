@@ -140,7 +140,7 @@ def enjoy() -> None:  # noqa: C901
     hyperparams, maybe_stats_path = get_saved_hyperparams(stats_path, norm_reward=args.norm_reward, test_mode=True)
 
     # load env_kwargs if existing
-    env_kwargs = {}
+    env_kwargs = {"render_mode": "human"}
     args_path = os.path.join(log_path, env_name, "args.yml")
     if os.path.isfile(args_path):
         with open(args_path) as f:
