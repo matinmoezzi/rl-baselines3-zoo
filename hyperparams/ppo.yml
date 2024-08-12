@@ -580,3 +580,25 @@ Walker2d-v4:
   gae_lambda: 0.95
   max_grad_norm: 1
   vf_coef: 0.871923
+
+SquidHunt-v0:
+  n_envs: 8
+  n_timesteps: !!float 4e6
+  policy: 'MlpPolicy'
+  batch_size: 128
+  n_steps: 512
+  gamma: 0.99
+  gae_lambda: 0.95
+  n_epochs: 10
+  ent_coef: 0.0
+  sde_sample_freq: 4
+  max_grad_norm: 0.5
+  vf_coef: 0.5
+  learning_rate: lin_1e-4
+  use_sde: True
+  clip_range: 0.2
+  policy_kwargs: "dict(log_std_init=-2,
+                       ortho_init=False,
+                       activation_fn=nn.GELU,
+                       net_arch=dict(pi=[256, 256], vf=[256, 256]),
+                       )"
