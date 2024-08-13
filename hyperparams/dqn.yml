@@ -83,16 +83,15 @@ Acrobot-v1:
 
 SquidHunt-v0:
   env_wrapper:
-    - rl_zoo3.wrappers.NoOpFrameSkip:
-        skip: 8
-    - rl_zoo3.wrappers.PenalizedReward
+    - rl_zoo3.wrappers.PenalizedReward:
+        penalty: 0.005
   policy: 'MlpPolicy'
-  n_timesteps: !!float 1e7
+  n_timesteps: !!float 2e7
   buffer_size: 100000
   learning_rate: !!float 1e-4
   batch_size: 256
   learning_starts: 100000
-  target_update_interval: 1000
+  target_update_interval: 5000
   train_freq: 4
   gradient_steps: 1
   exploration_fraction: 0.05
