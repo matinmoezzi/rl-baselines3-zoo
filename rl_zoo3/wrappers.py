@@ -289,6 +289,54 @@ class FrameSkip(gym.Wrapper):
         return obs, total_reward, terminated, truncated, info
 
 
+class NoOpFrameSkip(gym.Wrapper):
+    """
+    Return only every ``skip``-th frame (frameskipping)
+    Take the action only in the first frame, for other frames use no-op action.
+
+    :param env: the environment
+    :param skip: number of ``skip``-th frame
+    """
+
+    def __init__(self, env: gym.Env, skip: int = 4, no_op: int = 0):
+        super().__init__(env)
+        self._skip = skip
+        self._no_op = no_op
+
+    def step(self, action) -> GymStepReturn:
+        """
+        Step the environment with the given action
+        Repeat action, sum reward.
+
+        :param action: the action
+        :return: observation, reward, terminated, truncated, information
+        """
+        total_reward = 0.0
+        actions = [action] + [self._no_op] * (self._skip - 1)
+        for i in range(self._skip):
+            obs, reward, terminated, truncated, info = self.env.step(actions[i])
+            total_reward += float(reward)
+            if terminated or truncated:
+                break
+
+        return obs, total_reward, terminated, truncated, info
+
+
+class PenalizedReward(gym.Wrapper):
+    """
+    Penalize SquidHunt-v0 environment by -0.5 per squid in the screen.
+    """
+
+    def __init__(self, env):
+        super().__init__(env)
+
+    def step(self, action):
+        obs, reward, terminated, truncated, info = self.env.step(action)
+        num_squids = info["num_squids"]
+        reward += -0.5 * num_squids
+        return obs, reward, terminated, truncated, info
+
+
 class MaskVelocityWrapper(gym.ObservationWrapper):
     """
     Gym environment observation wrapper used to mask velocity terms in
