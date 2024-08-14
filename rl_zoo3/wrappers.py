@@ -327,14 +327,20 @@ class PenalizedReward(gym.Wrapper):
     Penalize SquidHunt-v0 environment by -0.5 per squid in the screen.
     """
 
-    def __init__(self, env, penalty: float = 0.005):
+    def __init__(self, env, penalty: float = 0.005, bullets_penalty: float = 0.1, empty_reward: float = 1.0):
         super().__init__(env)
         self._panalty = penalty
+        self._bullets_penalty = bullets_penalty
+        self._empty_reward = empty_reward
 
     def step(self, action):
         obs, reward, terminated, truncated, info = self.env.step(action)
         num_squids = info["num_squids"]
         reward += -self._panalty * num_squids
+        if info["num_bullets"] == 0:  # negative reward for no bullets
+            reward -= self._bullets_penalty
+        if num_squids == 0:  # positive reward for no squids
+            reward += self._empty_reward
         return obs, reward, terminated, truncated, info
 
 
