@@ -583,18 +583,20 @@ Walker2d-v4:
 
 SquidHunt-v0:
   env_wrapper:
+    - rl_zoo3.wrappers.NoOpFrameSkip:
+        skip: 4
     - rl_zoo3.wrappers.PenalizedReward:
         penalty: 0.005
-  n_envs: 8
+  n_envs: 64
   n_timesteps: !!float 2e7
   policy: 'MlpPolicy'
-  batch_size: 512
+  batch_size: 256
   n_steps: 1024 
   gamma: 0.99
   gae_lambda: 0.95
-  n_epochs: 10
+  n_epochs: 20
   ent_coef: 0.05
   vf_coef: 0.5
   learning_rate: lin_1e-4
   clip_range: 0.2
-  policy_kwargs: "dict(net_arch=dict(pi=[256, 256], vf=[256, 256]),)"
+  policy_kwargs: "dict(net_arch=dict(pi=[256, 256, 256], vf=[256, 256, 256]),)"
