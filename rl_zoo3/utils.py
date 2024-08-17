@@ -23,6 +23,8 @@ from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecEnv,
 # For custom activation fn
 from torch import nn as nn
 
+from .m_dqn import MunchausenDQN
+
 ALGOS: Dict[str, Type[BaseAlgorithm]] = {
     "a2c": A2C,
     "ddpg": DDPG,
@@ -36,6 +38,7 @@ ALGOS: Dict[str, Type[BaseAlgorithm]] = {
     "tqc": TQC,
     "trpo": TRPO,
     "ppo_lstm": RecurrentPPO,
+    "m_dqn": MunchausenDQN,
 }
 
 
